@@ -1,15 +1,18 @@
 import requests
+import urllib.request
 import json
 from bs4 import BeautifulSoup
 from os import write
 
-req = requests.get(r'https://steamcommunity.com/market/listings/730/G3SG1%20%7C%20Green%20Apple%20(Factory%20New)')
+url = r'https://steamcommunity.com/market/listings/730/G3SG1%20%7C%20Green%20Apple%20(Factory%20New)'
 
-data = req.text
+html = urllib.request.urlopen(url)
 
-soup = BeautifulSoup(data, 'html.parser')
+soup = BeautifulSoup(html, 'html.parser')
 
-headers = soup.find_all('div', class_='market-listing market_recent_listing_row')
+image_link = soup.find('img', {"class": "market_listing_item_img_container"})
 
-print()
+print(image_link)
 
+# for div in soup.find('div', {"class": "market_listing_item_name_block"}):
+#     print(div.get_text())
