@@ -10,9 +10,9 @@ html = urllib.request.urlopen(url)
 
 soup = BeautifulSoup(html, 'html.parser')
 
-image_link = soup.find('img', {"class": "market_listing_item_img_container"})
+for imgtag in soup.find_all('img'):
+    print(imgtag['src'])
 
-print(image_link)
 
 # for div in soup.find('div', {"class": "market_listing_item_name_block"}):
 #     print(div.get_text())
