@@ -2,17 +2,26 @@ import requests
 import urllib.request
 import json
 from bs4 import BeautifulSoup
-from os import write
+import os
 
-url = r'https://steamcommunity.com/market/listings/730/G3SG1%20%7C%20Green%20Apple%20(Factory%20New)'
+
+market_url = r'https://steamcommunity.com/market/listings/730/'
+
+item_name = r'AWP | Sun in Leo (Field-Tested)'
+
+
+url = market_url + item_name.replace(' ', r'%20')
+
 
 html = urllib.request.urlopen(url)
 
 soup = BeautifulSoup(html, 'html.parser')
 
 for imgtag in soup.find_all('img'):
-    print(imgtag['src'])
+    img_url = imgtag['src']
+    if img_url[-9:] == '360fx360f':
+        with open ('Images' + os.path.sep + item_name + '.png', 'wb') as handler:
+            img_data = requests.get(img_url). content
+            handler.write(img_data)
 
 
-# for div in soup.find('div', {"class": "market_listing_item_name_block"}):
-#     print(div.get_text())
