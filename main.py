@@ -24,4 +24,7 @@ for imgtag in soup.find_all('img'):
             img_data = requests.get(img_url). content
             handler.write(img_data)
 
+for price in soup.find_all('span', class_='market_listing_price_with_fee'):
+    print(price.contents[0].strip())
+
 
