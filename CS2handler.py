@@ -23,3 +23,4 @@ class CS2handler:
         
 
 Pingas = CS2handler()
+Pingas._get_market_data('AWP | Sun in Leo (Field-Tested)')
